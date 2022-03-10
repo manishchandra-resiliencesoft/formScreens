@@ -9,7 +9,7 @@ import {
  } from 'react-native'
  import Icon from 'react-native-vector-icons/AntDesign';
  import { Formik } from 'formik';
- import Text_Input from '../components/molecules/Text_Input';
+ import TextInput from '../components/molecules/ExtentedTextInput';
 
 const Form = () => {
   return (
@@ -26,7 +26,7 @@ const Form = () => {
         >
           {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
             <View>
-              <Text_Input 
+              <TextInput 
                 onChangeText={handleChange('email')}
                 onBlur={handleBlur('email')}
                 value={values.email}
@@ -35,7 +35,7 @@ const Form = () => {
               {errors.email && touched.email ? (
                   <Text style={styles.error}>{errors.email}</Text>
                 ) : null} 
-              <Text_Input 
+              <TextInput 
                 onChangeText={handleChange('password')}
                 onBlur={handleBlur('password')}
                 value={values.password}
@@ -44,11 +44,11 @@ const Form = () => {
               {errors.password && touched.password ? (
                   <Text style={styles.error}>{errors.password}</Text>
                 ) : null}
-              <TouchableOpacity onPress={handleSubmit}>
-                <View style={styles.btn}>
-                  <Text style={styles.txt1}>SUBMIT</Text>
-                </View>
-              </TouchableOpacity>
+                <TouchableOpacity
+            onPress={() => navigation.navigate('Request')}
+             style={styles.button}>
+                <Text style={styles.buttonInput}> Book An Appointment </Text>
+            </TouchableOpacity>
             </View>
           )}
         </Formik>
