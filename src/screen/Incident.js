@@ -1,27 +1,27 @@
 import React from 'react'
 import { 
   StyleSheet,
-  Text, 
-  TextInput, 
+  ScrollView,
+  Text,  
   View,
-  Image,
-  TouchableOpacity,
  } from 'react-native'
- import Icon from 'react-native-vector-icons/AntDesign';
+ import Icon from 'react-native-vector-icons/FontAwesome';
  import { Formik } from 'formik';
  import ExtendedTextInput from '../components/molecules/ExtendedTextInput';
 import Button from '../components/atoms/Button';
 
 const Form = () => {
   return (
-    <View style={styles.head}>
+    <ScrollView style={styles.head}>
         <View style={styles.icon}>
-            <Icon name="leftsquareo" size={40} color='white'/>
+          <View style={styles.arrow} >
+            <Icon name="angle-left" size={30} color='white'/>
+          </View> 
             <Text style={styles.title}>Report Incident</Text>
         </View>
       <View style={styles.body}>
       <Formik
-          initialValues={{ email: '', password: '' }}
+          initialValues={{ incident: '', address: '', vehicle_no: '', details: '', evidence: '' }}
         //   validationSchema={validationSchema}
           onSubmit={values => console.log('values', values)}
         >
@@ -29,60 +29,60 @@ const Form = () => {
             <View>
               <ExtendedTextInput
                 title='Incident'
-                onChangeText={handleChange('email')}
-                onBlur={handleBlur('email')}
-                value={values.email}
+                onChangeText={handleChange('incident')}
+                onBlur={handleBlur('incident')}
+                value={values.incident}
                 placeholder='Type of Incident'
               />
-              {errors.email && touched.email ? (
-                  <Text style={styles.error}>{errors.email}</Text>
+              {errors.incident && touched.incident ? (
+                  <Text style={styles.error}>{errors.incident}</Text>
                 ) : null} 
               <ExtendedTextInput
                 title='Address'
-                onChangeText={handleChange('password')}
-                onBlur={handleBlur('password')}
-                value={values.password}
+                onChangeText={handleChange('address')}
+                onBlur={handleBlur('address')}
+                value={values.address}
                 placeholder='Search for Address'
               />
-              {errors.password && touched.password ? (
-                  <Text style={styles.error}>{errors.password}</Text>
+              {errors.address && touched.address ? (
+                  <Text style={styles.error}>{errors.address}</Text>
                 ) : null}
               <ExtendedTextInput
                 title='Vehicle Number'
-                onChangeText={handleChange('email')}
-                onBlur={handleBlur('email')}
-                value={values.email}
+                onChangeText={handleChange('vehicle_no')}
+                onBlur={handleBlur('vehicle_no')}
+                value={values.vehicle_no}
                 placeholder='Enter here'
               />
-              {errors.email && touched.email ? (
-                  <Text style={styles.error}>{errors.email}</Text>
+              {errors.vehicle_no && touched.vehicle_no ? (
+                  <Text style={styles.error}>{errors.vehicle_no}</Text>
                 ) : null}
               <ExtendedTextInput
                 title='Prepetarator Details'
-                onChangeText={handleChange('email')}
-                onBlur={handleBlur('email')}
-                value={values.email}
+                onChangeText={handleChange('details')}
+                onBlur={handleBlur('details')}
+                value={values.details}
                 placeholder='Enter Details'
               />
-              {errors.email && touched.email ? (
-                  <Text style={styles.error}>{errors.email}</Text>
+              {errors.details && touched.details ? (
+                  <Text style={styles.error}>{errors.details}</Text>
                 ) : null}
               <ExtendedTextInput
                 title='Upload Your Evidence here'
-                onChangeText={handleChange('email')}
-                onBlur={handleBlur('email')}
-                value={values.email}
+                onChangeText={handleChange('evidence')}
+                onBlur={handleBlur('evidence')}
+                value={values.evidence}
                 placeholder='Select File'
               />
-              {errors.email && touched.email ? (
-                  <Text style={styles.error}>{errors.email}</Text>
+              {errors.evidence && touched.evidence ? (
+                  <Text style={styles.error}>{errors.evidence}</Text>
                 ) : null}
               <Button onPress={handleSubmit} text='Submit' />
             </View>
           )}
         </Formik>
       </View>
-    </View>
+    </ScrollView>
   )
 }
 
@@ -96,21 +96,26 @@ const styles = StyleSheet.create({
   icon: {
       flexDirection: 'row',
       backgroundColor: '#80bfff',
+      paddingVertical: 20,
   },
   title:{
     color: 'white',
     fontWeight: '400',
-    fontSize: 22,
+    fontSize: 20,
     margin: 15,
   },
   arrow: {
-    color: 'black',
-    weight: 20,
-    height: 20,
+    marginLeft: 25,
+    alignSelf: 'center',
+    borderWidth: 1,
+    borderColor: 'white',
+    paddingHorizontal: 10,
+    borderRadius: 10,
   },
   body:{
     flex:1,
-    marginHorizontal: 40,
+    marginTop: 20,
+    marginHorizontal: 50,
     justifyContent: 'center',
   },
   txt_input:{

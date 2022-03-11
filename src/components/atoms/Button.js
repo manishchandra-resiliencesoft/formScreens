@@ -9,11 +9,13 @@ const Button = ({text, onPress}) => {
       <View>
         <LinearGradient
           colors={['#4da6ff', '#8080ff']}
-          start={{ x: 0, y: 0.5 }}
-          end={{ x: 1, y: 0.5 }}
+          start={{ x: 0, y: 1 }}
+          end={{ x: 0.5, y: 1 }}
           style={styles.LinearGradient}>
           <Text style={styles.txt2}>{text}</Text>
-          <Icon name="angle-right" size={20} color="white" />
+          <View style={styles.icon} >
+            <Icon name="angle-right" size={25} color="#fff" />
+          </View>
         </LinearGradient>
       </View>
     </TouchableOpacity>
@@ -23,22 +25,19 @@ const Button = ({text, onPress}) => {
 export default Button;
 
 const styles = StyleSheet.create({
-  button: {
-    backgroundColor: 'lightblue',
-    marginVertical: 30,
-    paddingHorizontal: 20,
-    paddingVertical: 13,
-    borderRadius: 30,
-    flexDirection: 'row',
-  },
   txt2: {
     color: 'white',
     paddingHorizontal: 20,
     paddingVertical: 15,
   },
   LinearGradient: {
-    width: 280,
+    width: 265,
     height: 50,
-    borderRadius: 15,
+    borderRadius: 25,
+    flexDirection: 'row'
   },
+  icon: {
+    marginLeft: 155,
+    justifyContent: 'space-evenly'
+  }
 });
