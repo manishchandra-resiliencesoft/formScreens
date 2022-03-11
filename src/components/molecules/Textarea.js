@@ -1,18 +1,15 @@
 import {StyleSheet, Text, View, Image, TextInput} from 'react-native';
 import React from 'react';
-import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
-import FontistoIcon from 'react-native-vector-icons/Fontisto';
-import IoniconsIcon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-const ExtendedTextInput = ({
+
+const Textarea = ({
   title,
   onChangeText,
   onBlur,
   value,
   placeholder,
   icon,
-  fonticon,
-  ionicIcons,
 }) => {
   return (
     <View>
@@ -26,19 +23,12 @@ const ExtendedTextInput = ({
           value={value}
           placeholderTextColor={'lightgrey'}
         />
-        {icon ? <FontAwesomeIcon name={icon} size={30} color="black" /> : null}
-        {fonticon ? (
-          <FontistoIcon name={fonticon} size={30} color="black" />
-        ) : null}
-        {ionicIcons ? (
-          <IoniconsIcon name={ionicIcons} size={30} color="black" />
-        ) : null}
       </View>
     </View>
   );
 };
 
-export default ExtendedTextInput;
+export default Textarea;
 
 const styles = StyleSheet.create({
   inputcontainer: {
@@ -46,15 +36,14 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     flex: 1,
     borderRadius: 10,
+    height: 110,
     flexDirection: 'row',
-    alignItems: 'center',
     paddingHorizontal: 5,
-    marginTop: 5,
-    paddingRight: 15,
+    marginBottom: 20,
     backgroundColor: '#fff',
   },
   input: {
-    flex: 1,
+    flex:1,
     height: 50,
     color: 'black',
   },
@@ -62,7 +51,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '400',
     marginBottom: 10,
-    color: 'black',
-    marginTop: 15,
+    color: 'black'
   },
 });

@@ -2,34 +2,57 @@ import {
   StyleSheet,
   Text,
   View,
+  ScrollView,
   TextInput,
   TouchableOpacity,
 } from 'react-native';
 import React from 'react';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import {Formik} from 'formik';
 import ExtendedTextInput from '../components/molecules/ExtendedTextInput';
+import Textarea from '../components/molecules/Textarea';
+import FontistoIcon from 'react-native-vector-icons/Fontisto';
 import Button from '../components/atoms/Button';
+import * as Yup from 'yup';
+import RadioForm, {
+  RadioButton,
+  RadioButtonInput,
+  RadioButtonLabel,
+} from 'react-native-simple-radio-button';
 
+const validationSchema = Yup.object().shape({
+  date: Yup.string().required('*Required'),
+});
 
-const Consulation = ({navigation}) => {
+var data = [
+  {label: 'Assult', value: 0},
+  {label: 'Chain Snatching', value: 1},
+  {label: 'Domestic Violence', value: 2},
+  {label: 'Eve Teasing', value: 3},
+  {label: 'Sexual Harassment', value: 4},
+];
+
+const Consultation = ({navigation}) => {
   return (
-    <View style={styles.mainContainer}>
-      <View style={styles.head}>
-        <Icon 
-         onPress={() => navigation.goBack()}
-        
-        name="chevron-back" size={28} color="white" />
-        <Text style={styles.title}> Consulation </Text>
+    <ScrollView style={styles.mainContainer}>
+      <View style={styles.header}>
+        <View style={styles.icon}>
+          <Icon 
+          onPress={() => navigation.goBack()}
+          
+          name="angle-left" size={30} color="white" />
+        </View>
+        <Text style={styles.title}>Consultation</Text>
       </View>
       <View style={styles.formik}>
         <Formik
           initialValues={{
             startPoint: '',
-            Reason: '',
-            Date: '',
+            reason: '',
+            date: '',
           }}
-          onSubmit={values => navigation.navigate('Incident')}>
+          validationSchema={validationSchema}
+          onSubmit={values => console.log(values)}>
           {({
             handleChange,
             handleSubmit,
@@ -39,97 +62,103 @@ const Consulation = ({navigation}) => {
             touched,
           }) => (
             <View style={styles.heading}>
-              <ExtendedTextInput
-                title={'Select Type of Incident '}
-                placeholder="Start Point"
-                onChangeText={handleChange('startPoint')}
-                onBlur={handleBlur('startPoint')}
-                value={values.startPoint}
-              />
-
-              <ExtendedTextInput
+              <View style={styles.radiobutton}>
+                <Text style={styles.text}>Select Type of Incidence </Text>
+                <RadioForm
+                  style={styles.radio}
+                  radio_props={data}
+                  initial={1}
+                  onPress={value => {}}
+                  buttonSize={5}
+                  buttonOuterSize={20}
+                  buttonColor={'grey'}
+                />
+              </View>
+              {errors.startPoint && touched.startPoint ? (
+                <Text style={styles.error}>{errors.startPoint}</Text>
+              ) : null}
+              <Textarea
                 title={'Tell us more About it'}
-                
-                placeholder="Please describe your incident in details. This 
-                information is not shared with anyone"
-                onChangeText={handleChange('Reason')}
-                onBlur={handleBlur('Reason')}
-                value={values.Reason}
+                placeholder="Please describe your incident in details. This information is not shared with anyone"
+                onChangeText={handleChange('reason')}
+                onBlur={handleBlur('reason')}
+                value={values.reason}
               />
-              
+              {errors.reason && touched.reason ? (
+                <Text style={styles.error}>{errors.reason}</Text>
+              ) : null}
               <ExtendedTextInput
-                title={'Date'}
+                title={'Select a Date for Consultation'}
                 placeholder="dd-mm-yyyy"
-                onChangeText={handleChange('Date')}
-                onBlur={handleBlur('Date')}
-                value={values.Date}
+                onChangeText={handleChange('date')}
+                onBlur={handleBlur('date')}
+                value={values.date}
+                FontistoIcon="date"
               />
-
+              {errors.date && touched.date ? (
+                <Text style={styles.error}>{errors.date}</Text>
+              ) : null}
               <Button
                 style={styles.bttn}
                 onPress={handleSubmit}
-                text="Submit"
+                text="Book An Appointment"
               />
             </View>
           )}
         </Formik>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
-export default Consulation;
+export default Consultation;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 0.8,
-  },
-  title: {
-    color: 'white',
-
-    fontSize: 30,
-    marginTop: 60,
-    marginLeft: 30,
-  },
-  inputcontainer: {
-    borderColor: '#ccc',
-    borderWidth: 1,
-    borderRadius: 15,
-    flexDirection: 'row',
-    marginHorizontal: 5,
-    marginVertical: 5,
-
-    alignItems: 'center',
-    paddingHorizontal: 5,
-    marginTop: 20,
-    backgroundColor: '#fff',
-    width: 300,
-    height: 40,
-  },
-  input: {
-    height: 50,
-    color: 'black',
-  },
-  formik: {
-    flex: 1,
-    marginTop: 30,
-    backgroundColor: 'white',
-    marginHorizontal: 20,
-  },
-  heading: {
-    marginTop: 30,
-  },
   mainContainer: {
     flex: 1,
     backgroundColor: 'white',
   },
-  head: {
+  header: {
     flexDirection: 'row',
     backgroundColor: '#2E67F8',
-    flex: 0.2,
+    paddingVertical: 20,
   },
-  txt: {
-    fontSize: 15,
+  icon: {
+    marginLeft: 25,
+    alignSelf: 'center',
+    borderWidth: 1,
+    borderColor: 'white',
+    paddingHorizontal: 10,
+    borderRadius: 10,
+  },
+  title: {
+    color: 'white',
+    fontWeight: '400',
+    fontSize: 20,
+    margin: 15,
+  },
+  formik: {
+    flex: 1,
+    marginTop: 20,
+    marginHorizontal: 50,
+    justifyContent: 'center',
+  },
+  error: {
+    fontSize: 12,
     fontWeight: 'bold',
+    color: 'red',
+    textAlign: 'right',
+  },
+  radiobutton: {
+    marginVertical: 15,
+  },
+  radio: {
+    margin: 10,
+  },
+  text: {
+    fontSize: 15,
+    fontWeight: '400',
+    marginBottom: 10,
+    color: 'black',
   },
 });
