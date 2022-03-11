@@ -7,22 +7,32 @@ import {
  } from 'react-native'
  import Icon from 'react-native-vector-icons/FontAwesome';
  import { Formik } from 'formik';
+ import * as Yup from 'yup'
  import ExtendedTextInput from '../components/molecules/ExtendedTextInput';
-import Button from '../components/atoms/Button';
+ import Button from '../components/atoms/Button';
 
-const Form = () => {
+
+const validationSchema = Yup.object().shape({
+  incident: Yup.string().required('*Required'),
+  address: Yup.string().required('*Required'),
+  vehicle_no: Yup.string().required('*Required'),
+  details: Yup.string().required('*Required'),
+  evidence: Yup.string().required('*Required'),
+})
+
+const Incident = () => {
   return (
-    <ScrollView style={styles.head}>
-        <View style={styles.icon}>
-          <View style={styles.arrow} >
+    <ScrollView style={styles.mainContainer}>
+        <View style={styles.header}>
+          <View style={styles.icon} >
             <Icon name="angle-left" size={30} color='white'/>
           </View> 
             <Text style={styles.title}>Report Incident</Text>
         </View>
-      <View style={styles.body}>
+      <View style={styles.formik}>
       <Formik
           initialValues={{ incident: '', address: '', vehicle_no: '', details: '', evidence: '' }}
-        //   validationSchema={validationSchema}
+          validationSchema={validationSchema}
           onSubmit={values => console.log('values', values)}
         >
           {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
@@ -43,6 +53,7 @@ const Form = () => {
                 onBlur={handleBlur('address')}
                 value={values.address}
                 placeholder='Search for Address'
+                icon='map-marker'
               />
               {errors.address && touched.address ? (
                   <Text style={styles.error}>{errors.address}</Text>
@@ -73,6 +84,7 @@ const Form = () => {
                 onBlur={handleBlur('evidence')}
                 value={values.evidence}
                 placeholder='Select File'
+                icon='file'
               />
               {errors.evidence && touched.evidence ? (
                   <Text style={styles.error}>{errors.evidence}</Text>
@@ -86,25 +98,19 @@ const Form = () => {
   )
 }
 
-export default Form
+export default Incident
 
 const styles = StyleSheet.create({
-  head:{
+  mainContainer:{
     flex:1,
     backgroundColor: 'white'
   },
-  icon: {
+  header: {
       flexDirection: 'row',
       backgroundColor: '#80bfff',
       paddingVertical: 20,
   },
-  title:{
-    color: 'white',
-    fontWeight: '400',
-    fontSize: 20,
-    margin: 15,
-  },
-  arrow: {
+  icon: {
     marginLeft: 25,
     alignSelf: 'center',
     borderWidth: 1,
@@ -112,29 +118,22 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderRadius: 10,
   },
-  body:{
+  title:{
+    color: 'white',
+    fontWeight: '400',
+    fontSize: 20,
+    margin: 15,
+  },
+  formik:{
     flex:1,
     marginTop: 20,
     marginHorizontal: 50,
     justifyContent: 'center',
   },
-  txt_input:{
-    color: 'black',
-    margin: 30,
-  },
-  txt1:{
-    marginTop: 25,
-    fontSize: 22,
-    textAlign: 'center', 
-    color: 'black',
-    fontWeight: 'bold'
-  },
-  txt:{
-    fontSize: 15,
-  },
-  img1:{
-    marginTop: 30,
-    marginHorizontal: 125,
-  },
-  
+  error: {
+    fontSize: 12,
+    fontWeight: 'bold',
+    color: 'red',
+    textAlign: 'right',
+  }
 })

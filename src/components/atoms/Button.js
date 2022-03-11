@@ -27,17 +27,18 @@ export default Button;
 const styles = StyleSheet.create({
   txt2: {
     color: 'white',
-    paddingHorizontal: 20,
     paddingVertical: 15,
   },
   LinearGradient: {
+    marginVertical: 10,
     width: 265,
     height: 50,
+    justifyContent: 'space-between',
     borderRadius: 25,
+    paddingHorizontal: 20,
+    alignItems: 'center',
     flexDirection: 'row'
   },
   icon: {
-    marginLeft: 155,
-    justifyContent: 'space-evenly'
   }
 });
