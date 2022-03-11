@@ -1,17 +1,15 @@
 import {StyleSheet, Text, View, Image, TextInput} from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import FontistoIcon from 'react-native-vector-icons/Fontisto';
 
 
-const ExtentedTextInput = ({
+const Textarea = ({
   title,
   onChangeText,
   onBlur,
   value,
   placeholder,
   icon,
-  fonticon,
 }) => {
   return (
     <View>
@@ -25,14 +23,12 @@ const ExtentedTextInput = ({
           value={value}
           placeholderTextColor={'lightgrey'}
         />
-        <Icon name={icon} size={30} color='black'/>
-        <FontistoIcon name={fonticon} size={30} color="black" />
       </View>
     </View>
   );
 };
 
-export default ExtentedTextInput;
+export default Textarea;
 
 const styles = StyleSheet.create({
   inputcontainer: {
@@ -40,11 +36,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     flex: 1,
     borderRadius: 10,
+    height: 110,
     flexDirection: 'row',
-    alignItems: 'center',
     paddingHorizontal: 5,
     marginBottom: 20,
-    paddingRight: 15,
     backgroundColor: '#fff',
   },
   input: {
