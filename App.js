@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-//import Form from './src/screen/Form'
+import Incident from './src/screen/Incident'
 import Request from './src/screen/Request'
-import Consulation from './src/screen/Consulation'
+import Consultation from './src/screen/Consultation'
 import Navigation from './src/Navigation/Navigation'
 
 const App = () => {
   return (
     
-    <Consulation />
+    <Navigation />
 
   )
 }

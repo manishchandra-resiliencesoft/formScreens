@@ -8,7 +8,7 @@ import {
 import React from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Formik} from 'formik';
-import ExtentedTextInput from '../components/molecules/ExtentedTextInput';
+import ExtendedTextInput from '../components/molecules/ExtendedTextInput';
 import Button from '../components/atoms/Button';
 
 
@@ -16,7 +16,10 @@ const Consulation = ({navigation}) => {
   return (
     <View style={styles.mainContainer}>
       <View style={styles.head}>
-        <Icon name="chevron-back" size={28} color="white" />
+        <Icon 
+         onPress={() => navigation.goBack()}
+        
+        name="chevron-back" size={28} color="white" />
         <Text style={styles.title}> Consulation </Text>
       </View>
       <View style={styles.formik}>
@@ -26,7 +29,7 @@ const Consulation = ({navigation}) => {
             Reason: '',
             Date: '',
           }}
-          onSubmit={values => console.log(values)}>
+          onSubmit={values => navigation.navigate('Incident')}>
           {({
             handleChange,
             handleSubmit,
@@ -36,7 +39,7 @@ const Consulation = ({navigation}) => {
             touched,
           }) => (
             <View style={styles.heading}>
-              <ExtentedTextInput
+              <ExtendedTextInput
                 title={'Select Type of Incident '}
                 placeholder="Start Point"
                 onChangeText={handleChange('startPoint')}
@@ -44,7 +47,7 @@ const Consulation = ({navigation}) => {
                 value={values.startPoint}
               />
 
-              <ExtentedTextInput
+              <ExtendedTextInput
                 title={'Tell us more About it'}
                 
                 placeholder="Please describe your incident in details. This 
@@ -54,7 +57,7 @@ const Consulation = ({navigation}) => {
                 value={values.Reason}
               />
               
-              <ExtentedTextInput
+              <ExtendedTextInput
                 title={'Date'}
                 placeholder="dd-mm-yyyy"
                 onChangeText={handleChange('Date')}

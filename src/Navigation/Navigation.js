@@ -2,24 +2,24 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-//import Form from '../screen/Form';
+import Incident from '../screen/Incident';
 import Request from '../screen/Request';
-import Consulation from '../screen/Consulation';
+import Consultation from '../screen/Consultation';
 
 const Stack = createNativeStackNavigator();
 const Navigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-      //  initialRouteName="Form"
+        initialRouteName="Incident"
         screenOptions={{headerTitleAlign: 'center'}}>
-        {/* <Stack.Screen
-          name="Form"
-          component={Form}
+        <Stack.Screen
+          name="Incident"
+          component={Incident}
           options={{
             headerShown: false,
           }}
-        /> */}
+        />
         <Stack.Screen
           name="Request"
           component={Request}
@@ -28,8 +28,8 @@ const Navigation = () => {
           }}
         />
         <Stack.Screen
-          name="Consulation"
-          component={Consulation}
+          name="Consultation"
+          component={Consultation}
           options={{
             headerShown: false,
           }}

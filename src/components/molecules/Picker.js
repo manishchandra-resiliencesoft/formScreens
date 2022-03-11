@@ -4,7 +4,18 @@ import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import FontistoIcon from 'react-native-vector-icons/Fontisto';
 import IoniconsIcon from 'react-native-vector-icons/Ionicons';
 
-const ExtendedTextInput = ({
+const [selectedLanguage, setSelectedLanguage] = useState();
+
+const pickerRef = useRef();
+
+function open() {
+  pickerRef.current.focus();
+}
+
+function close() {
+  pickerRef.current.blur();
+}
+const Picker = ({
   title,
   onChangeText,
   onBlur,
@@ -13,19 +24,29 @@ const ExtendedTextInput = ({
   icon,
   fonticon,
   ionicIcons,
+  selectedGender,
+  label,
+  value,
 }) => {
   return (
     <View>
       <Text style={styles.title}>{title}</Text>
       <View style={styles.inputcontainer}>
-        <TextInput
+        <Picker
+          ref={pickerRef}
           style={styles.input}
           placeholder={placeholder}
           onChangeText={onChangeText}
           onBlur={onBlur}
           value={value}
           placeholderTextColor={'lightgrey'}
-        />
+          selectedValue={selectedGender}
+          onValueChange={(itemValue, itemIndex) =>
+            setSelectedLanguage(itemValue)
+          }>
+          <Picker.Item label={label} value={value} />
+          <Picker.Item label={label} value={value} />
+        </Picker>
         <FontAwesomeIcon name={icon} size={30} color="black" />
         <FontistoIcon name={fonticon} size={30} color="black" />
         <IoniconsIcon name={ionicIcons} size={30} color="black" />
@@ -34,7 +55,7 @@ const ExtendedTextInput = ({
   );
 };
 
-export default ExtendedTextInput;
+export default Picker;
 
 const styles = StyleSheet.create({
   inputcontainer: {
@@ -46,10 +67,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 5,
     marginTop: 5,
+    marginBottom: 15,
     paddingRight: 15,
     backgroundColor: '#fff',
-
-    
   },
   input: {
     flex: 1,
@@ -61,6 +81,5 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     marginBottom: 10,
     color: 'black',
-    marginTop: 15,
   },
 });

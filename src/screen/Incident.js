@@ -10,7 +10,7 @@ import {
  import ExtendedTextInput from '../components/molecules/ExtendedTextInput';
 import Button from '../components/atoms/Button';
 
-const Form = () => {
+const Incident = ({navigation}) => {
   return (
     <ScrollView style={styles.head}>
         <View style={styles.icon}>
@@ -23,7 +23,7 @@ const Form = () => {
       <Formik
           initialValues={{ incident: '', address: '', vehicle_no: '', details: '', evidence: '' }}
         //   validationSchema={validationSchema}
-          onSubmit={values => console.log('values', values)}
+          onSubmit={values => navigation.navigate('Request')}
         >
           {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
             <View>
@@ -86,7 +86,7 @@ const Form = () => {
   )
 }
 
-export default Form
+export default Incident
 
 const styles = StyleSheet.create({
   head:{
