@@ -93,7 +93,7 @@ const Consultation = ({navigation}) => {
                 onChangeText={handleChange('date')}
                 onBlur={handleBlur('date')}
                 value={values.date}
-                FontistoIcon="date"
+                fonticon="date"
               />
               {errors.date && touched.date ? (
                 <Text style={styles.error}>{errors.date}</Text>

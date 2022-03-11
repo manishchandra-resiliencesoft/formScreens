@@ -26,12 +26,12 @@ const ExtendedTextInput = ({
           value={value}
           placeholderTextColor={'lightgrey'}
         />
-        {icon ? <FontAwesomeIcon name={icon} size={30} color="black" /> : null}
+        {icon ? <FontAwesomeIcon name={icon} size={25} color="black" /> : null}
         {fonticon ? (
-          <FontistoIcon name={fonticon} size={30} color="black" />
+          <FontistoIcon name={fonticon} size={25} color="black" />
         ) : null}
         {ionicIcons ? (
-          <IoniconsIcon name={ionicIcons} size={30} color="black" />
+          <IoniconsIcon name={ionicIcons} size={25} color="black" />
         ) : null}
       </View>
     </View>
