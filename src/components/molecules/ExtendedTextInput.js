@@ -1,6 +1,7 @@
 import {StyleSheet, Text, View, Image, TextInput} from 'react-native';
 import React from 'react';
 
+
 const ExtentedTextInput = ({
   title,
   onChangeText,
