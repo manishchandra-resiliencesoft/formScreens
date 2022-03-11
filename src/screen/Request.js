@@ -4,18 +4,38 @@ import {
   View,
   TextInput,
   TouchableOpacity,
+  Picker,
 } from 'react-native';
 import React from 'react';
-//import Icon from 'react-native-vector-icons/AntDesign';
+import Icon from 'react-native-vector-icons/Ionicons';
 import {Formik} from 'formik';
 import {NavigationContainer} from '@react-navigation/native';
 import ExtentedTextInput from '../components/molecules/ExtentedTextInput';
+import Button from '../components/atoms/Button';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import {useState} from 'react';
 
 const Request = ({navigation}) => {
+  const [selectedValue, setSelectedValue] = useState();
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const handleConfirm = date => {
+    console.warn('A date has been picked: ', date);
+    hideDatePicker();
+  };
+
   return (
     <View style={styles.mainContainer}>
       <View style={styles.head}>
-        {/* <Icon name="chevron-back" size={28} color="black" /> */}
+        <Icon style={styles.arrow} name="chevron-back" size={28} color="white" />
         <Text style={styles.title}>Request</Text>
       </View>
 
@@ -45,7 +65,9 @@ const Request = ({navigation}) => {
                 onChangeText={handleChange('Source')}
                 onBlur={handleBlur('Source')}
                 value={values.Source}
+                
               />
+
 
               <ExtentedTextInput
                 title={'Destination'}
@@ -55,65 +77,60 @@ const Request = ({navigation}) => {
                 value={values.Destination}
               />
 
-          
-              <Text style={styles.txt}> Date </Text>
+              <ExtentedTextInput
+                title={'Date'}
+                placeholder="dd-mm-yyyy"
+                onChangeText={handleChange('Date')}
+                onBlur={handleBlur('Date')}
+                value={values.Date}
+              />
 
-              <View style={styles.inputcontainer}>
-                <TextInput
-                  style={styles.input}
-                  placeholder="dd-mm-yyyy"
-                  onChangeText={handleChange('Date')}
-                  onBlur={handleBlur('Date')}
-                  value={values.Date}
-                />
-              </View>
-              <Text style={styles.txt}> Add Duration </Text>
+              <ExtentedTextInput
+                title={'Add Duration'}
+                placeholder="No of Hours"
+                onChangeText={handleChange('addDuration')}
+                onBlur={handleBlur('addDuration')}
+                value={values.addDuration}
+              />
 
-              <View style={styles.inputcontainer}>
-                <TextInput
-                  style={styles.input}
-                  placeholder="No of Hours"
-                  onChangeText={handleChange('addDuration')}
-                  onBlur={handleBlur('addDuration')}
-                  value={values.addDuration}
-                />
-              </View>
+              {/* <Picker
+                title={' Choose with whom you want to Travel'}
+                placeholder="Select Gender"
+                onChangeText={handleChange('selectGender')}
+                onBlur={handleBlur('selectGender')}
+                value={values.selectGender}
+                selectedValue={selectedValue}
+                onValueChange={(itemValue, itemIndex) =>
+                  setSelectedValue(itemValue)
+                }>
+                <Picker.Item label="Java" value="java" />
+                <Picker.Item label="JavaScript" value="js" />
+              </Picker> */}
 
-              <Text style={styles.txt}>
-                {' '}
-                Choose with whom you want to Travel{' '}
-              </Text>
+              <ExtentedTextInput
+                title={' Purpose of Travel'}
+                placeholder="Reason"
+                onChangeText={handleChange('Reason')}
+                onBlur={handleBlur('Reason')}
+                value={values.Reason}
+              />
 
-              <View style={styles.inputcontainer}>
-                <TextInput
-                  style={styles.input}
-                  placeholder="Select Gender"
-                  onChangeText={handleChange('selectGender')}
-                  onBlur={handleBlur('selectGender')}
-                  value={values.selectGender}
-                />
-              </View>
-              <Text style={styles.txt}> Purpose of Travel </Text>
-
-              <View style={styles.inputcontainer}>
-                <TextInput
-                  style={styles.input}
-                  placeholder="Reason"
-                  onChangeText={handleChange('Reason')}
-                  onBlur={handleBlur('Reason')}
-                  value={values.Reason}
-                />
-              </View>
-              <TouchableOpacity
-                style={styles.button}
-                onPress={() => navigation.navigate('Consulation')}>
-                <Text> Submit </Text>
-              </TouchableOpacity>
-
-              {/* <Button style={styles.button} title="Submit"  onPress={handleSubmit} /> */}
+              <Button
+                style={styles.bttn}
+                onPress={handleSubmit}
+                text="Submit"
+                        
+              />
             </View>
           )}
         </Formik>
+        {/* <Button title="Show Date Picker" onPress={showDatePicker} />
+              <DateTimePickerModal
+                isVisible={isDatePickerVisible}
+                mode="date"
+                onConfirm={handleConfirm}
+                onCancel={hideDatePicker}
+              /> */}
       </View>
     </View>
   );
@@ -124,11 +141,9 @@ export default Request;
 const styles = StyleSheet.create({
   container: {
     flex: 0.8,
-    backgroundColor: 'blue',
   },
   title: {
     color: 'white',
-    //fontWeight: 'bold',
     fontSize: 30,
     marginTop: 60,
     marginLeft: 30,
@@ -167,7 +182,8 @@ const styles = StyleSheet.create({
   },
   head: {
     flexDirection: 'row',
-    backgroundColor: 'blue',
+    backgroundColor: '#2E67F8',
+    flex: 0.2,
   },
   txt: {
     fontSize: 15,
@@ -176,18 +192,14 @@ const styles = StyleSheet.create({
   button: {
     marginTop: 20,
   },
-  button: {
-    marginTop: 40,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    borderRadius: 15,
-    width: 250,
-    height: 40,
-    backgroundColor: 'purple',
-  },
-  buttonInput: {
+  arrow: {
     marginLeft: 25,
-    marginTop: 6,
-    color: 'white',
+    alignSelf: 'center',
+    borderWidth: 1,
+    borderColor: 'white',
+    paddingHorizontal: 7,
+    borderRadius: 10,
+    marginTop: 30,
+    paddingVertical: 7,
   },
 });
