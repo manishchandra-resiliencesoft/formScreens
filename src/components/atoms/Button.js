@@ -6,7 +6,7 @@ import LinearGradient from 'react-native-linear-gradient';
 const Button = ({text, onPress}) => {
   return (
     <TouchableOpacity onPress={onPress}>
-      <View>
+      <View style={styles.bttn}>
         <LinearGradient
           colors={['#4da6ff', '#8080ff']}
           start={{ x: 0, y: 1 }}
@@ -37,8 +37,13 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     paddingHorizontal: 20,
     alignItems: 'center',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    marginVertical : 50,
+    
   },
   icon: {
+  },
+  bttn : {
+    alignItems: 'center'
   }
 });

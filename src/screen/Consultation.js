@@ -37,7 +37,10 @@ const Consultation = ({navigation}) => {
     <ScrollView style={styles.mainContainer}>
       <View style={styles.header}>
         <View style={styles.icon}>
-          <Icon name="angle-left" size={30} color="white" />
+          <Icon 
+          onPress={() => navigation.goBack()}
+          
+          name="angle-left" size={30} color="white" />
         </View>
         <Text style={styles.title}>Consultation</Text>
       </View>
@@ -90,7 +93,7 @@ const Consultation = ({navigation}) => {
                 onChangeText={handleChange('date')}
                 onBlur={handleBlur('date')}
                 value={values.date}
-                FontistoIcon="date"
+                fonticon="date"
               />
               {errors.date && touched.date ? (
                 <Text style={styles.error}>{errors.date}</Text>
