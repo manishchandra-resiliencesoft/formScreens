@@ -1,5 +1,6 @@
 import {StyleSheet, Text, View, Image, TextInput} from 'react-native';
 import React from 'react';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 const ExtentedTextInput = ({
@@ -8,6 +9,7 @@ const ExtentedTextInput = ({
   onBlur,
   value,
   placeholder,
+  icon,
 }) => {
   return (
     <View>
@@ -21,6 +23,7 @@ const ExtentedTextInput = ({
           value={value}
           placeholderTextColor={'lightgrey'}
         />
+        <Icon name={icon} size={30} color='black'/>
       </View>
     </View>
   );
@@ -32,12 +35,14 @@ const styles = StyleSheet.create({
   inputcontainer: {
     borderColor: '#ccc',
     borderWidth: 1,
+    flex: 1,
     borderRadius: 10,
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 5,
     marginTop: 5,
     marginBottom: 15,
+    paddingRight: 15,
     backgroundColor: '#fff',
   },
   input: {
